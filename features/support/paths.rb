@@ -21,6 +21,9 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    
+    when /the details page for "(.*)"/i
+      business_path(Business.find_by_name($1))
 
     else
       begin
