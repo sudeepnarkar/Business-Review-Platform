@@ -88,11 +88,15 @@ end
 
 When /^(?:|I )check "([^"]*)"$/ do |field|
   check(field)
+  
 end
 
 When /^(?:|I )uncheck "([^"]*)"$/ do |field|
   uncheck(field)
+  
 end
+
+
 
 When /^(?:|I )choose "([^"]*)"$/ do |field|
   choose(field)
@@ -204,6 +208,7 @@ Then /^the "([^"]*)" field should have no error$/ do |field|
     assert !classes.include?('error')
   end
 end
+
 
 Then /^the "([^"]*)" checkbox(?: within (.*))? should be checked$/ do |label, parent|
   with_scope(parent) do

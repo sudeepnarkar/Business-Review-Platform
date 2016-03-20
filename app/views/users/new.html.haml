@@ -1,1 +1,24 @@
+%h1 Create New User
+
+= form_tag users_path do
+
+
+  
+  = label :user, :email, 'Email'
+  = text_field :user, 'email'
+  
+  = label :user, :password, 'Password'
+  = password_field :user, 'password'
+  
+  = label :user, :confirm, 'Confirm'
+  = password_field :user, 'confirm'
+
+  
+  = radio_button_tag :type, 'reviewer', false
+  
+  
+  = radio_button_tag :type, 'owner', false
+  
+
+  = submit_tag 'Create Account'
 
