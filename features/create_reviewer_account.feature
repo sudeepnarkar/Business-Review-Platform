@@ -5,29 +5,36 @@ Feature: Set up reviewer account
     So that I can start writing reviews
     
 Background:
-    Given: I am on the homepage 
+    Given I am on the signup page
     
-    When: I press "sign-up"
-    
-    Then: I should be on the sign-up page
 
-Scenario:
+Scenario: I correctly enter my signup credentials
     
-    When I fill in "user-name-field" with "John Doe"
-    
-    And I fill in "user-email-field" with "jdoe1@university.edu"
-    
-    And I fill in "user-password-field" with "&28*jaAjdsA"
-    
-    And I fill in "user-password-confirmation-field" with "&28*jaAjdsA"
+    When I fill in the following:
+    |user-name-field    | John Doe              |
+    |user-email-field   | jdoe1@university.edu  |
+    |user-password-field| &28*jaAjdsA           |
+    |user-password-confirmation-field | &28*jaAjdsA |
     
     And I check "user-account-box"
     
-    And I click "create-account"
+    And I press "create-account"
     
     Then I should be on the reviewer page
     
-    And The "Reviewers" table should contain 
-    |name        |email                 |password      
-    |John Doe    |jdoe1@university.edu  |&28*jaAjdsA
+    And I should see "John Doe"
+    
+Scenario: I leave "user-name-field" empty
+  
+    When I fill in the following:
+    |user-name-field    |                       |
+    |user-email-field   | jdoe1@university.edu  |
+    |user-password-field| &28*jaAjdsA           |
+    |user-password-confirmation-field | &28*jaAjdsA |
+     
+    And  I check "user-account-box"    
+    
+    When I press "create-account"
+    
+    Then I should see "Please fill out the required fields"
     

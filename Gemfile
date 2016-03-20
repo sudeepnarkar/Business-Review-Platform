@@ -43,6 +43,7 @@ group :development, :test do
   gem 'byebug'
   gem 'capybara'
   gem 'rspec-rails'
+  gem 'database_cleaner', '1.4.1'
 end
 
 group :test do
