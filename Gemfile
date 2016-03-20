@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #salted password
 gem 'bcrypt-ruby', '~> 3.1.5', require: "bcrypt"
 
-
+gem 'haml'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
