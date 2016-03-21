@@ -16,8 +16,8 @@ module NavigationHelpers
     when /the signup page/
       new_user_path
       
-    when /the reviewer page/
-      user_path session[ :user ]
+    when /the reviewer page for (.+)/
+      user_path User.find_by_
 
     when /^the home\s?page$/
       '/'
