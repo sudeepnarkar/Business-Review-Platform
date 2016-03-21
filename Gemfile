@@ -35,7 +35,10 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.10'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'haml'
+gem 'google_places'
+gem 'geocoder'
+gem 'geokit-rails'
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3' 
@@ -47,7 +50,7 @@ group :development, :test do
 end
 
 group :test do
-gem 'cucumber-rails'
+gem 'cucumber-rails', :require => false
 gem 'cucumber-rails-training-wheels'
 
 end

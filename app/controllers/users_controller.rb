@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @reviews = User.find(params[:id]).reviews
   end
 
   # GET /users/new

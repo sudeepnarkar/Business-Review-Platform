@@ -18,7 +18,12 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
-
+    when /the details page for "(.*)"/i
+      business_path(Business.find_by_name($1))
+      
+    when /"(.*)"'s page/i
+      #puts User.all.inspect
+      user_path(User.find_by_name($1))
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
