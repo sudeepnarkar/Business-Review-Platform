@@ -39,6 +39,8 @@ gem 'haml'
 gem 'google_places'
 gem 'geocoder'
 gem 'geokit-rails'
+gem 'rack_session_access'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3' 
@@ -50,8 +52,8 @@ group :development, :test do
 end
 
 group :test do
-gem 'cucumber-rails', :require => false
-gem 'cucumber-rails-training-wheels'
+  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails-training-wheels'
 
 end
 

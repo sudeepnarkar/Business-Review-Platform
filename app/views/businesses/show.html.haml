@@ -3,8 +3,7 @@
 
 -@revs.each do |rev|
     %h4 
-        = link_to "#{rev.user.name}", user_path(rev.user)
-        #{rev.create_date}:
+        #{rev.user.name}: #{rev.create_date}:
         
     -for star in 1..rev.stars.to_i
         %img{:src => "/images/Star.svg.png", :style => "width:50px"}

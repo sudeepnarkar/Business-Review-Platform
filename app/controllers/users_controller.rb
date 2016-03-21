@@ -10,7 +10,12 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @reviews = User.find(params[:id]).reviews
+    #unless(params[:id] != session[:user_id])
+      @reviews = User.find(params[:id]).reviews
+    #else
+    #  flash[:notice] = "You don't have access to #{User.find(params[:id]).name}'s records"
+    #  redirect_to 
+    #end
   end
 
   # GET /users/new

@@ -6,6 +6,7 @@ Background:
     | Kids Korner | 3    |1-Dec-2015|
     | Sals Pizza  | 4    |2-Dec-2015|
     | Tinos Pizza | 5    |3-Dec-2015|
+  #And "John" is logged in
   
 Scenario: I see someone's reviews reviews
     When I am on "John"'s page
