@@ -29,19 +29,10 @@ class UsersController < ApplicationController
   
   def login
   end  
-<<<<<<< HEAD
 
-
- def validate
+  def validate
    redirect_to users_path
- end   
-=======
->>>>>>> e89b79d647f612eefb4d88f3d660722c9e0fb2f0
-
-
- def validate
-   redirect_to users_path
- end   
+  end   
  
   # POST /users
   # POST /users.json
