@@ -17,6 +17,7 @@ module NavigationHelpers
       new_user_path
 
     when /^the home\s?page$/
+<<<<<<< HEAD
       '/'
     when /the details page for "(.*)"/i
       business_path(Business.find_by_name($1))
@@ -24,6 +25,18 @@ module NavigationHelpers
     when /"(.*)"'s page/i
       #puts User.all.inspect
       user_path(User.find_by_name($1))
+=======
+      user_path
+    
+    when /^the login page$/
+      user_login_path
+      
+    #when /^the reviewer page for (.+)/
+     # user_path User.where(email: $1)[0].id
+    
+    
+    
+>>>>>>> bf4f7ee56806bc148b21c8ec6b0fcf31a483a9b5
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
