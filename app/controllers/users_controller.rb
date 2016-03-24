@@ -20,7 +20,15 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
   end
+  
+  def login
+  end  
 
+
+ def validate
+   redirect_to users_path
+ end   
+ 
   # POST /users
   # POST /users.json
   def create

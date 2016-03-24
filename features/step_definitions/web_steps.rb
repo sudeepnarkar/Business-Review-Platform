@@ -36,6 +36,13 @@ When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
 end
 
+Then /^I should be on the (.+) for (.+)$/ do|page_name,email|
+  user_email = User.find_by_email email
+  expect(user_email.email).to eq email
+
+end
+
+
 # Multi-line step scoper
 When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
   with_scope(parent) { When "#{step}:", table_or_string }
@@ -67,12 +74,23 @@ end
 
 # Use this to fill in an entire form with data from a table. Example:
 #
-#   When I fill in the following:
-#     | Account Number | 5002       |
-#     | Expiry date    | 2009-11-01 |
+#When /^I fill in the following:$/ 
+#      | Account Number | 5002       |
+#      | Expiry date    | 2009-11-01 |
 #     | Note           | Nice guy   |
-#     | Wants Email?   |            |
-#
+#      | Wants Email?   |            |
+# end
+ 
+ Given /When I fill in the following/ do |users_table|
+ users_table.hashes.each do |user|
+   # each returned element will be a hash whose key is the table header.
+   # you should arrange to add that movie to the database here.
+   Movie.create!(movie)
+   end
+    #flunk "Unimplemented"
+end
+ 
+ 
 # TODO: Add support for checkbox, select or option
 # based on naming conventions.
 #
@@ -226,7 +244,8 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
     end
   end
 end
- 
+
+=begin
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
@@ -235,6 +254,7 @@ Then /^(?:|I )should be on (.+)$/ do |page_name|
     assert_equal path_to(page_name), current_path
   end
 end
+=end
 
 Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   query = URI.parse(current_url).query
@@ -249,6 +269,8 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   end
 end
 
-Then /^show me the page$/ do
-  save_and_open_page
+Then /^show me (.+)$/ do |page_name|
+  visit path_to(page_name)
 end
+
+

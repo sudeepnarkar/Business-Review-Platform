@@ -17,8 +17,16 @@ module NavigationHelpers
       new_user_path
 
     when /^the home\s?page$/
-      '/'
-
+      user_path
+    
+    when /^the login page$/
+      user_login_path
+      
+    #when /^the reviewer page for (.+)/
+     # user_path User.where(email: $1)[0].id
+    
+    
+    
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
