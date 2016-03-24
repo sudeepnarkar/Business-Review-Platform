@@ -30,10 +30,11 @@ class UsersController < ApplicationController
   def login
   end  
 
-  def validate
+
+ def validate
    redirect_to users_path
-  end   
- 
+ end   
+
   # POST /users
   # POST /users.json
   def create
