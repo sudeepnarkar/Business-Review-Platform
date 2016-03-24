@@ -40,6 +40,7 @@ gem 'google_places'
 gem 'geocoder'
 gem 'geokit-rails'
 gem 'rack_session_access'
+gem 'pg'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
