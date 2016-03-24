@@ -20,9 +20,7 @@ Scenario: I correctly enter my signup credentials
     
     And I press "Create Account"
     
-    Then I should be on the reviewer page
-    
-    And I should see "John Doe"
+    Then I should be on the reviewer page for jdoe1@binghamton.edu
     
 Scenario: I leave "user-name-field" empty
   
