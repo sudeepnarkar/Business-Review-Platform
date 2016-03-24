@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   resources :users
+<<<<<<< HEAD
+=======
+  get 'user/login' => 'users#login'
+  
+  post 'user/login' => 'users#validate'
+>>>>>>> bf4f7ee56806bc148b21c8ec6b0fcf31a483a9b5
   
   get 'user/login' => 'users#login'
   
