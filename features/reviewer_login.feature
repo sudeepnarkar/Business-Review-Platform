@@ -20,7 +20,11 @@ Scenario: I correctly enters my login credentials
     
     And I press "Login"
     
+<<<<<<< HEAD
+    Then I should see the reviewer page for jdoe1@university.edu
+=======
     Then I should be on the reviewer page for jdoe1@university.edu
+>>>>>>> e89b79d647f612eefb4d88f3d660722c9e0fb2f0
     
     And I should see "jdoe1@university.edu"
 

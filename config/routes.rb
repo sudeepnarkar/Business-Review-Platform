@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   post 'user/login' => 'users#validate'
 >>>>>>> bf4f7ee56806bc148b21c8ec6b0fcf31a483a9b5
   
+  get 'user/login' => 'users#login'
+  
+  post 'user/login' => 'users#validate'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   resources :businesses
