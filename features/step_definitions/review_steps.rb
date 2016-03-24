@@ -50,7 +50,7 @@ Then (/^I should see "(.+)" before "(.+)" stars/) do |name, i|
   #puts page.body
   split_by_name = page.body.split("#{name}")  
   should_have_img = split_by_name[1].split("<br />")
-  should_have_img[0].scan(/\/images\/Star.svg.png/).count.should eq(i.to_i)
+  should_have_img[0].scan(/\/Star-.svg.png/).count.should eq(i.to_i)
 end
 
 Then (/^I should see the image "(.+)"$/) do |image|

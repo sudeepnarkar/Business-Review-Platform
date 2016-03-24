@@ -5,3 +5,25 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Review.destroy_all
+Business.destroy_all
+User.destroy_all
+
+for i in 0..10 do
+    Business.create!(name: "Bus#{i}")
+    User.create!(name:"Usr#{i}")
+end
+
+bus = Business.all
+usr = User.all
+
+bus.each do |b|
+    usr.each do |u|
+        rnd = Random.new     
+        rate = rnd.rand(1...5)
+        r = Review.create!(stars: rate, create_date: Time.now, description: "Wowee, this place is great!")
+        b.reviews << r
+        u.reviews << r
+    end
+end
+
