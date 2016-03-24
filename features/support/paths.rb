@@ -24,6 +24,9 @@ module NavigationHelpers
     when /"(.*)"'s page/i
       #puts User.all.inspect
       user_path(User.find_by_name($1))
+      
+    when /^the login page$/
+      user_login_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

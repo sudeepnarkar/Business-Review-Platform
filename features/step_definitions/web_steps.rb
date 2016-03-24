@@ -252,3 +252,12 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Then /^show me (.+)$/ do |page_name|
+  visit path_to(page_name)
+end
+
+Then /^I should see the (.+) for (.+)$/ do|page_name,email|
+  user_email = User.find_by_email email
+  expect(user_email.email).to eq email
+end
