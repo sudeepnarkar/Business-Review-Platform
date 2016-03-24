@@ -90,7 +90,6 @@ GEM
     gherkin (3.2.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-<<<<<<< HEAD
     google_places (0.32.0)
       httparty (~> 0.13.1)
     haml (4.0.7)
@@ -98,10 +97,6 @@ GEM
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-=======
-    haml (4.0.7)
-      tilt
->>>>>>> bf4f7ee56806bc148b21c8ec6b0fcf31a483a9b5
     i18n (0.7.0)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -221,12 +216,9 @@ DEPENDENCIES
   cucumber-rails
   cucumber-rails-training-wheels
   database_cleaner (= 1.4.1)
-<<<<<<< HEAD
   geocoder
   geokit-rails
   google_places
-=======
->>>>>>> bf4f7ee56806bc148b21c8ec6b0fcf31a483a9b5
   haml
   jbuilder (~> 2.0)
   jquery-rails
