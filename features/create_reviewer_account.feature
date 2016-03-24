@@ -22,17 +22,46 @@ Scenario: I correctly enter my signup credentials
     
     Then I should be on the reviewer page for jdoe1@binghamton.edu
     
-Scenario: I leave "user-name-field" empty
+Scenario: I leave "Email" empty
   
-    When I fill in the following:
-    |user-name-field    |                       |
-    |user-email-field   | jdoe1@university.edu  |
-    |user-password-field| &28*jaAjdsA           |
-    |user-password-confirmation-field | &28*jaAjdsA |
+    When I fill in "Email" with ""
+    
+    When I fill in "Password" with "abc123"
+    
+    And I fill in "Confirm" with "abc123"
      
-    And  I check "user-account-box"    
+    And I choose "type_reviewer"  
     
-    When I press "create-account"
+    When I press "Create Account"
     
-    Then I should see "Please fill out the required fields"
+    Then I should be on the signup page
+    
+Scenario: I leave "Password" empty
+  
+    When I fill in "Email" with "jdoe1"
+    
+    When I fill in "Password" with ""
+    
+    And I fill in "Confirm" with "abc123"
+     
+    And I choose "type_reviewer"  
+    
+    When I press "Create Account"
+    
+    Then I should be on the signup page
+    
+Scenario: I password and confirmation don't match
+  
+    When I fill in "Email" with "jdoe1"
+    
+    When I fill in "Password" with "abb123"
+    
+    And I fill in "Confirm" with "abc123"
+     
+    And I choose "type_reviewer"  
+    
+    When I press "Create Account"
+    
+    Then I should be on the signup page
+  
     

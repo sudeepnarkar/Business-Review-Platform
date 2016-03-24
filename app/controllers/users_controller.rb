@@ -28,7 +28,11 @@ class UsersController < ApplicationController
     
     p params
     p params["user"]["email"] =~ /^.+$/
-    if params["user"]["email"] =~ /^.+$/
+    
+    if params["user"]["email"] =~ /^.+$/ and 
+      params["user"]["password"] =~ /^.+$/ and 
+      params["user"]["confirm"].eql? params["user"]["password"]
+      
       p "happy."
       @user = User.create! user_params
       
