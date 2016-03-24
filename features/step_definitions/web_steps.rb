@@ -277,11 +277,7 @@ Then /^show me (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
-<<<<<<< HEAD
 Then /^I should see the (.+) for (.+)$/ do|page_name,email|
   user_email = User.find_by_email email
   expect(user_email.email).to eq email
 end
-=======
-
->>>>>>> e89b79d647f612eefb4d88f3d660722c9e0fb2f0

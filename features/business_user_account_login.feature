@@ -1,29 +1,46 @@
-Feature: Login to Business User account
-    
-    As a Business User
+Feature: Login to Business account
+
+    As a Reviewer
     I want to to login to my account
-    So that I can view my business profile
+    So that I can start writing reviews
 
 Background:
 
-    Given  I'm a Business Owner
-    When  I have an account
-    Then  I should be able to login with my credentials
+    Given the following users exist:
+    | email                  | password_hash  |password_salt |
+    | jdoe1@university.edu   | &28*jaAjdsA    | #!234*       |
+ 
+    Given I am on the login page
 
-Scenario:business user enters correct credentials
+Scenario: I correctly enters my login credentials
+  
+    When I fill in "Email" with "jdoe1@university.edu"
+    
+    When I fill in "Password_hash" with "&28*jaAjdsA"
+    
+    And I press "Login"
+    
+    Then I should see the reviewer page for jdoe1@university.edu
+    
+    And I should see "jdoe1@university.edu"
 
-    When I enter the url of the "Business Review Platform" portal
-    Then I should be able to see the login page
-    And I click on the login page
-    Then I should see a screen with fields "username" and "password"
-    And I enter my credentials
-    Then I should be able to successfully log into my account
+Scenario:I enter incorrect credentials
+    
+    When I fill in "Email" with "incorrect@university.edu"
+    
+    When I fill in "Password_hash" with "incorrect_password"
+    
+    And I press "Login"
+    
+    Then show me the login page
 
-Scenario:business user enters incorrect credentials
-
-    When I enter the url of the "Business Review Platform" portal
-    Then I should be able to see the login/signup page
-    And I click on the Login page
-    Then I should see a screen with fields "username" and "password"
-    And I enter my credentials
-    Then I should be able to view an error message "Check your credentials"
+Scenario: I leave "user-email-field" and "user-password-field" empty
+    
+    When I fill in "Email" with " "
+    
+    When I fill in "Password_hash" with " "
+    
+    And I press "Login"
+    
+    Then show me the login page
+    
