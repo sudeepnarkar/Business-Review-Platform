@@ -219,7 +219,6 @@ DEPENDENCIES
   geocoder
   geokit-rails
   google_places
-
   haml
   jbuilder (~> 2.0)
   jquery-rails
@@ -233,3 +232,6 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.11.2

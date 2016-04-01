@@ -38,7 +38,7 @@ gem 'haml'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'haml'
+
 gem 'google_places'
 gem 'geocoder'
 gem 'geokit-rails'

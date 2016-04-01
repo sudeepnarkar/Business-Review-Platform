@@ -36,11 +36,13 @@ When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
 end
 
+=begin
 Then /^I should be on the (.+) for (.+)$/ do|page_name,email|
   user_email = User.find_by_email email
   expect(user_email.email).to eq email
 
 end
+=end
 
 
 # Multi-line step scoper
@@ -59,7 +61,6 @@ end
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
-
 When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
 end
@@ -106,24 +107,17 @@ end
 
 When /^(?:|I )check "([^"]*)"$/ do |field|
   check(field)
-  
 end
-
 When /^(?:|I )uncheck "([^"]*)"$/ do |field|
   uncheck(field)
-  
 end
-
-
 
 When /^(?:|I )choose "([^"]*)"$/ do |field|
   choose(field)
 end
-
 When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
   attach_file(field, File.expand_path(path))
 end
-
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
   if page.respond_to? :should
     page.should have_content(text)
@@ -149,17 +143,14 @@ Then /^(?:|I )should not see "([^"]*)"$/ do |text|
     assert page.has_no_content?(text)
   end
 end
-
 Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-
   if page.respond_to? :should
     page.should have_no_xpath('//*', :text => regexp)
   else
     assert page.has_no_xpath?('//*', :text => regexp)
   end
 end
-
 Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field, parent, value|
   with_scope(parent) do
     field = find_field(field)
@@ -171,7 +162,6 @@ Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field
     end
   end
 end
-
 Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |field, parent, value|
   with_scope(parent) do
     field = find_field(field)
@@ -183,21 +173,17 @@ Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |f
     end
   end
 end
-
 Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_message|
   element = find_field(field)
   classes = element.find(:xpath, '..')[:class].split(' ')
-
   form_for_input = element.find(:xpath, 'ancestor::form[1]')
   using_formtastic = form_for_input[:class].include?('formtastic')
   error_class = using_formtastic ? 'error' : 'field_with_errors'
-
   if classes.respond_to? :should
     classes.should include(error_class)
   else
     assert classes.include?(error_class)
   end
-
   if page.respond_to?(:should)
     if using_formtastic
       error_paragraph = element.find(:xpath, '../*[@class="inline-errors"][1]')
@@ -226,8 +212,6 @@ Then /^the "([^"]*)" field should have no error$/ do |field|
     assert !classes.include?('error')
   end
 end
-
-
 Then /^the "([^"]*)" checkbox(?: within (.*))? should be checked$/ do |label, parent|
   with_scope(parent) do
     field_checked = find_field(label)['checked']
@@ -250,7 +234,7 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
   end
 end
 
-=begin
+
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
@@ -259,7 +243,7 @@ Then /^(?:|I )should be on (.+)$/ do |page_name|
     assert_equal path_to(page_name), current_path
   end
 end
-=end
+
 
 Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   query = URI.parse(current_url).query
@@ -273,15 +257,12 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
     assert_equal expected_params, actual_params
   end
 end
-
 Then /^show me the page$/ do
   save_and_open_page
 end
-
 Then /^show me (.+)$/ do |page_name|
   visit path_to(page_name)
 end
-
 Then /^I should see the (.+) for (.+)$/ do|page_name,email|
   user_email = User.find_by_email email
   expect(user_email.email).to eq email
