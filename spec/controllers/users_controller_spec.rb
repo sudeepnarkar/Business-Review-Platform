@@ -3,14 +3,15 @@ require 'rails_helper'
 describe UsersController do
     describe '#create' do
         before :each do
-            @user_params = {:email => "jdoe", :password_hash => "146347", :password_salt => "1231"}
-            @sad_params = {:email => "", :password_hash => "146347", :password_salt => "1231"}
+            @good_conf = "146347"
+            @user_params = {:email => "jdoe", :password => "146347", :confirm => @good_conf, :password_salt => "1231"}
+            @sad_params = {:email => "", :password => "146347", :confirm => @good_conf, :password_salt => "1231"}
             @next_uid = "1"
             @new_user = double('John Doe', :id => @next_uid) 
         end
         context "when valid parameters are provided" do
             it "creates a new movie if parameters are valid" do
-                expect(User).to receive(:create!).with(@user_params).and_return @new_user
+                expect(User).to receive(:create!).with({:email => "jdoe", :password_hash => "146347"}).and_return @new_user
                 
                 post :create, :user => @user_params
                 #expect(response).to redirect_to(user_path)

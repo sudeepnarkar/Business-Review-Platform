@@ -28,13 +28,16 @@ class UsersController < ApplicationController
     
     p params
     p params["user"]["email"] =~ /^.+$/
-    
+    p params["user"]["confirm"].eql? params["user"]["password"]
     if params["user"]["email"] =~ /^.+$/ and 
       params["user"]["password"] =~ /^.+$/ and 
       params["user"]["confirm"].eql? params["user"]["password"]
       
       p "happy."
-      @user = User.create! user_params
+      @user = User.create! :email => params["user"]["email"],
+        :password_hash => params["user"]["password"]
+        
+      p ">>>user id #{@user.id}"
       
       redirect_to user_path(@user.id)
     else
