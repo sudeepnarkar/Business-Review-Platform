@@ -22,14 +22,18 @@ module NavigationHelpers
       user_path User.where(email: $1)[0].id
 
     when /^the home\s?page$/
-      '/'
-
-    # Add more mappings here.
-    # Here is an example that pulls values out of the Regexp:
-    #
-    #   when /^(.*)'s profile page$/i
-    #     user_profile_path(User.find_by_login($1))
-
+      user_path
+      
+    when /the login page$/
+      user_login_path
+  
+    when /the details page for "(.*)"/i
+      business_path(Business.find_by_name($1))
+      
+    when /"(.*)"'s page/i
+      #puts User.all.inspect
+      user_path(User.find_by_name($1))
+      
     else
       begin
         page_name =~ /^the (.*) page$/
