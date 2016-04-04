@@ -15,6 +15,11 @@ module NavigationHelpers
     
     when /the signup page/
       new_user_path
+      
+      
+      
+    when /the reviewer page for (.+)/
+      user_path User.where(email: $1)[0].id
 
     when /^the home\s?page$/
       user_path

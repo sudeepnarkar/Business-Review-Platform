@@ -38,7 +38,7 @@ gem 'haml'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'haml'
+
 gem 'google_places'
 gem 'geocoder'
 gem 'geokit-rails'
@@ -53,6 +53,7 @@ group :development, :test do
   gem 'capybara'
   gem 'rspec-rails'
   gem 'database_cleaner', '1.4.1'
+  
 end
 
 group :test do
