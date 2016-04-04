@@ -3,7 +3,7 @@ Given(/^The following reviews exist for "([^"]*)":$/) do |arg1, table|
   test_bus = Business.find_or_create_by(name: arg1)
 
   table.hashes.each do |review|
-      r = Review.create!(stars: review[:rating])
+      r = Review.create!(stars: review[:rating],create_date: review[:date])
       r.user = User.find_or_create_by(name: review[:reviewer])
       test_bus.reviews << r
   end
@@ -15,7 +15,7 @@ Given(/^"([^"]*)" has made the following reviews:$/) do |arg1, table|
   test_usr = User.find_or_create_by(name: arg1)
   #puts User.all.to_s
   table.hashes.each do |rev|
-    r = Review.create!(stars: rev[:rating])
+    r = Review.create!(stars: rev[:rating],create_date: rev[:date])
     r.business = Business.find_or_create_by(name: rev[:place])
     test_usr. reviews << r
   end
@@ -50,13 +50,13 @@ Then (/^I should see "(.+)" before "(.+)" stars/) do |name, i|
   #puts page.body
   split_by_name = page.body.split("#{name}")  
   should_have_img = split_by_name[1].split("<br />")
-  should_have_img[0].scan(/\/images\/Star.svg.png/).count.should eq(i.to_i)
+  should_have_img[0].scan(/\/Star-.svg.png/).count.should eq(i.to_i)
 end
 
 Then (/^I should see the image "(.+)"$/) do |image|
     page.should have_xpath("//img[@src=\"/public/images/#{image}\"]")
 end
 
-Given (/"(.+)" is logged in/) do |name|
-  page.set_rack_session('user_id' => User.find_by_name(name).id)
-end
+#Given (/"(.+)" is logged in/) do |name|
+#  page.set_rack_session('user_id' => User.find_by_name(name).id)
+#end

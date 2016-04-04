@@ -1,0 +1,6 @@
+%h2 Index
+
+-@buses.each do |bus|
+    %p= link_to("#{bus.name}", business_path(bus))
+-@users.each do |usr|
+    %p= link_to("#{usr.name}", user_path(usr))
