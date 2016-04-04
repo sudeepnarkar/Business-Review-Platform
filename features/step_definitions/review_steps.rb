@@ -57,6 +57,6 @@ Then (/^I should see the image "(.+)"$/) do |image|
     page.should have_xpath("//img[@src=\"/public/images/#{image}\"]")
 end
 
-Given (/"(.+)" is logged in/) do |name|
-  page.set_rack_session('user_id' => User.find_by_name(name).id)
-end
+#Given (/"(.+)" is logged in/) do |name|
+#  page.set_rack_session('user_id' => User.find_by_name(name).id)
+#end

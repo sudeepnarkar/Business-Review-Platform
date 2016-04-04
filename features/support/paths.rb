@@ -29,6 +29,9 @@ module NavigationHelpers
       #puts User.all.inspect
       user_path(User.find_by_name($1))
       
+    when /the index page/i
+      root
+      
     else
       begin
         page_name =~ /^the (.*) page$/

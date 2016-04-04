@@ -9,3 +9,18 @@ Given /the following users exist/ do |users_table|
    end
     #flunk "Unimplemented"
 end
+
+Given (/I sign up as as "(.+)"/i) do |name|
+  step %Q{I am on the signup page}
+  step %Q{I fill in "Email" with "#{name}@university.edu"}
+  step %Q{I fill in "Password" with "password"}
+  step %Q{I fill in "Confirm" with "password"}
+  step %Q{I choose "type_reviewer"}
+  step %Q{I press "Create Account}
+  #testuser = User.find_by_email("#{name}@university.edu")
+end
+
+Given (/"(.+)" exists as a reviewer/i) do |arg1|
+ User.find_or_create_by(name: arg1)
+ 
+end
