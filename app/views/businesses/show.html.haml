@@ -2,17 +2,17 @@
 %h2 #{@bus.name}
 
 -@revs.each do |rev|
-    %h4 
-        #{rev.user.name}: #{rev.create_date}:
+    %big
+        %strong #{rev.user.name}: 
+        #{rev.create_date.strftime("%m/%d/%Y")}:
         
     -for star in 1..rev.stars.to_i
-        %img{:src => "/images/Star.svg.png", :style => "width:50px"}
+        %img{:src => "/Star-.svg.png", :style => "width:20px"}
         
     -unless rev.description.blank?
         <br />
-        %p #{rev.description}
+        #{rev.description}
         
     <br />
     <br />
-        
     

@@ -38,11 +38,12 @@ gem 'haml'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'haml'
+
 gem 'google_places'
 gem 'geocoder'
 gem 'geokit-rails'
 gem 'rack_session_access'
+gem 'pg'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -52,6 +53,7 @@ group :development, :test do
   gem 'capybara'
   gem 'rspec-rails'
   gem 'database_cleaner', '1.4.1'
+  
 end
 
 group :test do

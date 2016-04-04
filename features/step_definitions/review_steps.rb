@@ -50,13 +50,13 @@ Then (/^I should see "(.+)" before "(.+)" stars/) do |name, i|
   #puts page.body
   split_by_name = page.body.split("#{name}")  
   should_have_img = split_by_name[1].split("<br />")
-  should_have_img[0].scan(/\/images\/Star.svg.png/).count.should eq(i.to_i)
+  should_have_img[0].scan(/\/Star-.svg.png/).count.should eq(i.to_i)
 end
 
 Then (/^I should see the image "(.+)"$/) do |image|
     page.should have_xpath("//img[@src=\"/public/images/#{image}\"]")
 end
 
-Given (/"(.+)" is logged in/) do |name|
-  page.set_rack_session('user_id' => User.find_by_name(name).id)
-end
+#Given (/"(.+)" is logged in/) do |name|
+#  page.set_rack_session('user_id' => User.find_by_name(name).id)
+#end
