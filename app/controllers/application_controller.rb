@@ -6,4 +6,6 @@ class ApplicationController < ActionController::Base
     @buses = Business.all
     @users = User.all
   end
+  
+
 end

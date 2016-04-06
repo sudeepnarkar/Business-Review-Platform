@@ -1,6 +1,48 @@
 require 'rails_helper'
 
 describe UsersController do
+    
+     describe "profile" do
+        
+        it "redirects to ur profile if logged in" do
+            new_usr = double("John Doe", :id => 1)
+            session[:user] = {}
+            session[:user]["name"] = "John Doe"
+            session[:user]["id"] = 1
+            get :profile
+            expect(response).to redirect_to(user_path(1))
+        end
+        
+        it "redirects to the login page if not" do
+            get :profile
+            expect(response).to redirect_to(user_login_path)
+        end
+       
+   end
+   
+   describe "GET #show" do
+        before(:each) do
+            @usr = User.create!(:name => "fake user")
+        end
+        after(:each) do
+           @usr.delete
+        end
+        
+        it "renders the show template if logged in" do
+            session[:user] = @usr.as_json
+            get :show, :id => @usr.id
+            expect(response).to render_template("show")
+        end
+        
+        it "redirects to root if logged in as another" do
+            new_user = double("New Guy", :id => 2)
+            session[:user] = new_user.as_json
+            get :show, :id => @usr.id
+            expect(response).to redirect_to(root_path)
+        end
+       
+   end
+   
     describe '#create' do
         before :each do
             @good_conf = "146347"
