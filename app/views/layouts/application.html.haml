@@ -1,0 +1,13 @@
+!!! 5
+%html
+  %head
+    %title 
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+  %body
+    %h1.title Business Review Platform 
+    %a{:href => user_profile_path, :class => "profile"}
+      %img{:src =>  "/profile.png"}
+    
