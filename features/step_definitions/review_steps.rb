@@ -3,7 +3,7 @@ Given(/^The following reviews exist for "([^"]*)":$/) do |arg1, table|
   test_bus = Business.find_or_create_by(name: arg1)
 
   table.hashes.each do |review|
-      r = Review.create!(stars: review[:rating],create_date: review[:date])
+      r = Review.create!(stars: review[:rating])
       r.user = User.find_or_create_by(name: review[:reviewer])
       test_bus.reviews << r
   end
@@ -15,7 +15,7 @@ Given(/^"([^"]*)" has made the following reviews:$/) do |arg1, table|
   test_usr = User.find_or_create_by(name: arg1)
   #puts User.all.to_s
   table.hashes.each do |rev|
-    r = Review.create!(stars: rev[:rating],create_date: rev[:date])
+    r = Review.create!(stars: rev[:rating])
     r.business = Business.find_or_create_by(name: rev[:place])
     test_usr. reviews << r
   end
