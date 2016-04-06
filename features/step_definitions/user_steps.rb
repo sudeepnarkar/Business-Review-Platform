@@ -16,7 +16,7 @@ Given (/I sign up as as "(.+)"/i) do |name|
   step %Q{I fill in "Password" with "password"}
   step %Q{I fill in "Confirm" with "password"}
   step %Q{I choose "type_reviewer"}
-  step %Q{I press "Create Account}
+  step %Q{I press "Create Account"}
   #testuser = User.find_by_email("#{name}@university.edu")
 end
 

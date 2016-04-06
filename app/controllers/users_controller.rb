@@ -9,13 +9,30 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+  
+  def profile
+    if (session[:user] == nil)
+      flash[:notice] = "You are not logged in!"
+      redirect_to(user_login_path)
+    else
+      redirect_to(user_path(session[:user].id))
+    end
+  end
+  
   def show
-    #unless(params[:id] != session[:user_id])
-      @reviews = User.find(params[:id]).reviews
-    #else
-    #  flash[:notice] = "You don't have access to #{User.find(params[:id]).name}'s records"
-    #  redirect_to 
-    #end
+    if(session[:user] != nil)
+      #p params[:id]
+      #p session[:user].id
+      if (params[:id].to_i == session[:user].id) 
+        @reviews = User.find(params[:id]).reviews
+      else
+        flash[:notice] = "You don't have access to #{User.find(params[:id]).name}'s records"
+        redirect_to root_path
+      end
+    else
+      flash[:notice] = "You are not logged in!"
+      redirect_to user_login_path
+    end
   end
 
   # GET /users/new
@@ -52,7 +69,7 @@ class UsersController < ApplicationController
         :password_hash => params["user"]["password"]
         
       p ">>>user id #{@user.id}"
-      
+      session[:user] = @user
       redirect_to user_path(@user.id)
     else
       p "sad."
