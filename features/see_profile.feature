@@ -13,7 +13,7 @@ Background:
   And I am on the index page
   
 Scenario:
-    When I hit the profile button
+    When I follow image link "Profile"
     Then I should be on "Amy Pohler"'s page
     
 Scenario:

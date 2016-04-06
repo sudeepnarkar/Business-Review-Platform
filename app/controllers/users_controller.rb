@@ -15,18 +15,21 @@ class UsersController < ApplicationController
       flash[:notice] = "You are not logged in!"
       redirect_to(user_login_path)
     else
-      redirect_to(user_path(session[:user].id))
+      p "profile"
+      p session[:user]
+      redirect_to(user_path(session[:user]["id"]))
     end
   end
   
   def show
     if(session[:user] != nil)
       #p params[:id]
-      #p session[:user].id
-      if (params[:id].to_i == session[:user].id) 
+      #p session[:user].inspect
+      #p session[:user]["id"]
+      if (params[:id].to_i == session[:user]["id"]) 
         @reviews = User.find(params[:id]).reviews
       else
-        flash[:notice] = "You don't have access to #{User.find(params[:id]).name}'s records"
+        flash[:notice] = "You do not have access to #{User.find(params[:id]).name}'s page"
         redirect_to root_path
       end
     else
@@ -57,9 +60,9 @@ class UsersController < ApplicationController
   def create
     
     
-    p params
-    p params["user"]["email"] =~ /^.+$/
-    p params["user"]["confirm"].eql? params["user"]["password"]
+    #p params
+    #p params["user"]["email"] =~ /^.+$/
+    #p params["user"]["confirm"].eql? params["user"]["password"]
     if params["user"]["email"] =~ /^.+$/ and 
       params["user"]["password"] =~ /^.+$/ and 
       params["user"]["confirm"].eql? params["user"]["password"]
@@ -68,7 +71,7 @@ class UsersController < ApplicationController
       @user = User.create! :email => params["user"]["email"],
         :password_hash => params["user"]["password"]
         
-      p ">>>user id #{@user.id}"
+      #p ">>>user id #{@user.id}"
       session[:user] = @user
       redirect_to user_path(@user.id)
     else

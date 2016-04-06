@@ -273,3 +273,7 @@ When(/^I hit the profile button$/) do
   find('profile').click
   #pending # Write code here that turns the phrase above into concrete actions
 end
+
+When /^I follow image link "([^"]*)"$/ do |img_alt|
+    find(:xpath, "//img[@alt = '#{img_alt}']/parent::a").click()
+end

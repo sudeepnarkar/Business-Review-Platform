@@ -8,6 +8,12 @@
 
   %body
     %h1.title Business Review Platform 
-    %a{:href => user_profile_path, :class => "profile"}
-      %img{:src =>  "/profile.png"}
+    %a{:href => user_profile_path}
+      %img.profile{:src =>  "/profile.png", :alt => "Profile"}
+    #main
+      - if flash[:notice]
+        #notice.message= flash[:notice]
+      - elsif flash[:warning]
+        #warning.message= flash[:warning]
     
+      =yield

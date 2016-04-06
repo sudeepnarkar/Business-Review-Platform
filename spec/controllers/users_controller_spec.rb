@@ -6,7 +6,9 @@ describe UsersController do
         
         it "redirects to ur profile if logged in" do
             new_usr = double("John Doe", :id => 1)
-            session[:user] = new_usr
+            session[:user] = {}
+            session[:user]["name"] = "John Doe"
+            session[:user]["id"] = 1
             get :profile
             expect(response).to redirect_to(user_path(1))
         end
@@ -27,14 +29,14 @@ describe UsersController do
         end
         
         it "renders the show template if logged in" do
-            session[:user] = @usr
+            session[:user] = @usr.as_json
             get :show, :id => @usr.id
             expect(response).to render_template("show")
         end
         
         it "redirects to root if logged in as another" do
             new_user = double("New Guy", :id => 2)
-            session[:user] = new_user
+            session[:user] = new_user.as_json
             get :show, :id => @usr.id
             expect(response).to redirect_to(root_path)
         end
