@@ -7,9 +7,10 @@
     = csrf_meta_tags
 
   %body
-    %h1.title Business Review Platform 
-    %a{:href => user_profile_path}
-      %img.profile{:src =>  "/profile.png", :alt => "Profile"}
+    %h1.title 
+      Business Review Platform 
+      %a{:href => user_profile_path}
+        %img.profile{:src =>  "/profile.png", :alt => "Profile"}
     #main
       - if flash[:notice]
         #notice.message= flash[:notice]

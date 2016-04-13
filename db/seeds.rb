@@ -11,7 +11,7 @@ User.destroy_all
 
 for i in 0..10 do
     Business.create!(name: "Bus#{i}")
-    User.create!(name:"Usr#{i}")
+    User.create!(name:"Usr#{i}", password_hash: "password#{i}")
 end
 
 bus = Business.all
