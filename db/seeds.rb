@@ -20,7 +20,7 @@ usr = User.all
 bus.each do |b|
     usr.each do |u|
         rnd = Random.new     
-        rate = rnd.rand(1...5)
+        rate = rnd.rand(1..5)
         r = Review.create!(stars: rate, create_date: Time.now, description: "Wowee, this place is great!")
         b.reviews << r
         u.reviews << r
