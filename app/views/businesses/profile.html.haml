@@ -1,0 +1,14 @@
+%h2 #{@bus.name}
+
+%p #{@bus.name} has an overall average rating of #{@avg.round(2)}
+%p #{@bus.reviews.count} people have left a review on your business' page!
+
+%p #{@message}
+
+
+%center
+    %h3 Amount of reviews for each rating
+= bar_chart @bus.reviews.group(:stars).count, colors:["#D45500"], label: "Number of Reviews"
+%center
+    %h3 Average rating over time
+= line_chart @bus.reviews.group("strftime('%Y-%m-%d', create_date)").average("stars"), colors:["#D45500"]
