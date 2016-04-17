@@ -20,9 +20,9 @@ Scenario: I correctly enters my login credentials
     
     And I press "Login"
     
-    Then I should see the reviewer page for jdoe1@university.edu
+    Then I should be on the reviewer page for jdoe1@university.edu
     
-    And I should see "jdoe1@university.edu"
+    #And I should see "jdoe1@university.edu"
 
 Scenario:I enter incorrect credentials
     
@@ -32,7 +32,7 @@ Scenario:I enter incorrect credentials
     
     And I press "Login"
     
-    Then show me the login page
+    Then I should be on the login page
 
 Scenario: I leave "user-email-field" and "user-password-field" empty
     
@@ -42,5 +42,5 @@ Scenario: I leave "user-email-field" and "user-password-field" empty
     
     And I press "Login"
     
-    Then show me the login page
+    Then I should be on the login page
     

@@ -52,9 +52,25 @@ class UsersController < ApplicationController
 
 
  def validate
-   redirect_to users_path
- end   
+   p params
+   @user = User.find_by(:email => params[:user][:email],:password_hash => params[:user][:password_hash])
+   p @user.inspect
+   if @user != nil
+     p "Happy path inside validate"
+     session[:user] = @user
+     redirect_to user_path(@user.id)
+   else
+     p "sad path inside validate"
+     redirect_to user_login_path
+   end
 
+    #if @user = User.authenticate(params[:email], params[:password])
+      # Save the user ID in the session so it can be used in
+      # subsequent requests
+      #session[:user] = @user
+ 
+ end
+ 
   # POST /users
   # POST /users.json
   def create
