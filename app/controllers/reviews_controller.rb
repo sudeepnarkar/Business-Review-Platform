@@ -4,9 +4,13 @@ class ReviewsController < ApplicationController
         
         @ip = request.remote_ip
         p @ip
-        location = Geocoder.search(@ip)
-        latitude = location[latitude]
-        longitude = location[longitude]
+        #location = Geocoder.coordinates(@ip)
+        #location = request.location
+        location = Geokit::Geocoders::MultiGeocoder.geocode(@ip)
+        @test = location.ll.inspect
+        #location = Geocoder.search(@ip)
+        #latitude = location[0]
+        #longitude = location[1]
     end
     
     

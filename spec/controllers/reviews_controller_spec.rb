@@ -3,19 +3,14 @@ require 'rails_helper'
 describe ReviewsController do
     describe '#new' do
         it 'Calls the correct geocoder method' do
-            request.stub(:remote_ip).and_return "71 Harris Road, Katonah, NY 10536"
-            expect(Geocoder).to receive(:coordinates)
+            my_ip = "1.1.1.1.1"
+            my_coords = double("my_coords", :ll => "40.000, 40.0000")
+            request.stub(:remote_ip).and_return my_ip
+            expect(Geokit::Geocoders::MultiGeocoder).to receive(:geocode).
+                with(my_ip).and_return(my_coords)
             #expect(request).to receive(:location) 
             post :new
         
-        end
-        
-        it 'Returns a more or less correct set of coordinates given an ip 
-            address.' do
-            request.stub(:location)
-               
-            post :new
-                
         end
     end
 end
