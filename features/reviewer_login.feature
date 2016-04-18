@@ -22,7 +22,6 @@ Scenario: I correctly enters my login credentials
     
     Then I should be on the reviewer page for jdoe1@university.edu
     
-    #And I should see "jdoe1@university.edu"
 
 Scenario:I enter incorrect credentials
     
