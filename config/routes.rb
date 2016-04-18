@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   
   get 'user/profile' => 'users#profile'
   
+  get 'user/logout' => 'users#logout'
+  
   resources :reviews
   
   
