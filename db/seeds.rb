@@ -11,19 +11,22 @@ User.destroy_all
 
 for i in 0..10 do
     Business.create!(name: "Bus#{i}")
-    User.create!(name:"Usr#{i}")
+    User.create!(name:"Usr#{i}", password_hash: "password#{i}")
 end
 
 bus = Business.all
 usr = User.all
 
+
 bus.each do |b|
+    i = 0;
     usr.each do |u|
         rnd = Random.new     
-        rate = rnd.rand(1...5)
-        r = Review.create!(stars: rate, create_date: Time.now, description: "Wowee, this place is great!")
+        rate = rnd.rand(1..5)
+        r = Review.create!(stars: rate, create_date: (Date.today - (5 * i)), description: "Wowee, this place is great!")
         b.reviews << r
         u.reviews << r
+        i = i + 1
     end
 end
 

@@ -50,6 +50,10 @@ class UsersController < ApplicationController
   def login
   end  
 
+  def logout
+    session_clear
+    redirect_to(root_path)
+  end
 
  def validate
    p params

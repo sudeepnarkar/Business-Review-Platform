@@ -22,5 +22,24 @@ RSpec.describe BusinessesController, :type => :controller do
        
    end
     
+    describe "GET #profile" do
+        before(:each) do
+            @bus = Business.create!(:name => "fake business")
+        end
+        after(:each) do
+           @bus.delete
+        end
+        
+        it "renders the profile template" do
+            get :profile, :id => @bus.id
+            expect(response).to render_template("profile")
+        end
+        
+        it "responds successfully" do
+            get :profile, :id => @bus.id
+            expect(response).to be_success
+        end
+       
+   end
     
 end

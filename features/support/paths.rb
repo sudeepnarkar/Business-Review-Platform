@@ -34,7 +34,8 @@ module NavigationHelpers
       #puts User.all.inspect
       user_path(User.find_by_name($1))
       
-  
+    when/"(.*)"'s profile page/i
+      profile_business_path(Business.find_by_name($1))
       
     when /the index page/i
       '/'

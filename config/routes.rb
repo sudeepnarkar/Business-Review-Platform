@@ -7,10 +7,14 @@ Rails.application.routes.draw do
   
   get 'user/profile' => 'users#profile'
   
+  resources :reviews
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  resources :businesses
+  resources :businesses do
+    get 'profile', on: :member
+  end
   # You can have the root of your site routed with "root"
   
 
