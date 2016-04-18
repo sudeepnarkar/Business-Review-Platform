@@ -94,22 +94,14 @@ describe UsersController do
             @next_uid = "1"
             @new_user = double('John Doe', :id => @next_uid)
             
-            #@User.create(name: 'John Doe', email:'jdoe',password_hash:'146347')
         end
         context "when valid parameters are provided" do
             it "checks if user is already in database" do
-                
-                #expect(User).to receive(:create!).with({:email => "jdoe", :password_hash => "146347"}).and_return @new_user
-                
-                #post :create, :user => @user_params
-                
                 expect(User).to receive(:find_by).with(:email => "jdoe", :password_hash => "146347").and_return @new_user
-                
                 post :validate, :user => @user_params
-                #expect(response).to redirect_to(user_path)
             end
             
-            it "redirects to the show page" do
+            it "redirects to the user's profile page" do
                 local_usr = double('local_usr', :id => "1")
                 User.stub(:find_by).and_return local_usr
                 post :validate, :user => @user_params
@@ -124,19 +116,17 @@ describe UsersController do
                 post :validate, :user => @sad_params
                 #expect(response).to redirect_to(user_path)
             end
-            it "redirects to the new page" do
+            it "redirects to the login page" do
                 local_usr = nil
                 User.stub(:find_by).and_return  local_usr
                 post :validate, :user => @sad_params
                 expect(response).to redirect_to(user_login_path)
             end
-            
-            
-        end
-        
 
-        
-        
+
+        end
+
+
 end
     
     
