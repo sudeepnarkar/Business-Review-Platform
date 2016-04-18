@@ -35,18 +35,10 @@ module NavigationHelpers
     when /^the login page$/
       user_login_path
       
-
-    #when /^the reviewer page for (.+)/
-     # user_path User.where(email: $1)[0].id
-    # Add more mappings here.
-    # Here is an example that pulls values out of the Regexp:
-    #
-    #   when /^(.*)'s profile page$/i
-    #     user_profile_path(User.find_by_login($1))
-
-
+  
+      
     when /the index page/i
-      root
+      '/'
       
 
     else

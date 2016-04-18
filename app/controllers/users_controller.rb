@@ -9,13 +9,33 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+  
+  def profile
+    if (session[:user] == nil)
+      flash[:notice] = "You are not logged in!"
+      redirect_to(user_login_path)
+    else
+      p "profile"
+      p session[:user]
+      redirect_to(user_path(session[:user]["id"]))
+    end
+  end
+  
   def show
-    #unless(params[:id] != session[:user_id])
-      @reviews = User.find(params[:id]).reviews
-    #else
-    #  flash[:notice] = "You don't have access to #{User.find(params[:id]).name}'s records"
-    #  redirect_to 
-    #end
+    if(session[:user] != nil)
+      #p params[:id]
+      #p session[:user].inspect
+      #p session[:user]["id"]
+      if (params[:id].to_i == session[:user]["id"]) 
+        @reviews = User.find(params[:id]).reviews
+      else
+        flash[:notice] = "You do not have access to #{User.find(params[:id]).name}'s page"
+        redirect_to root_path
+      end
+    else
+      flash[:notice] = "You are not logged in!"
+      redirect_to user_login_path
+    end
   end
 
   # GET /users/new
@@ -32,17 +52,33 @@ class UsersController < ApplicationController
 
 
  def validate
-   redirect_to users_path
- end   
+   p params
+   @user = User.find_by(:email => params[:user][:email],:password_hash => params[:user][:password_hash])
+   p @user.inspect
+   if @user != nil
+     p "Happy path inside validate"
+     session[:user] = @user
+     redirect_to user_path(@user.id)
+   else
+     p "sad path inside validate"
+     redirect_to user_login_path
+   end
 
+    #if @user = User.authenticate(params[:email], params[:password])
+      # Save the user ID in the session so it can be used in
+      # subsequent requests
+      #session[:user] = @user
+ 
+ end
+ 
   # POST /users
   # POST /users.json
   def create
     
     
-    p params
-    p params["user"]["email"] =~ /^.+$/
-    p params["user"]["confirm"].eql? params["user"]["password"]
+    #p params
+    #p params["user"]["email"] =~ /^.+$/
+    #p params["user"]["confirm"].eql? params["user"]["password"]
     if params["user"]["email"] =~ /^.+$/ and 
       params["user"]["password"] =~ /^.+$/ and 
       params["user"]["confirm"].eql? params["user"]["password"]
@@ -51,8 +87,8 @@ class UsersController < ApplicationController
       @user = User.create! :email => params["user"]["email"],
         :password_hash => params["user"]["password"]
         
-      p ">>>user id #{@user.id}"
-      
+      #p ">>>user id #{@user.id}"
+      session[:user] = @user
       redirect_to user_path(@user.id)
     else
       p "sad."
