@@ -1,6 +1,7 @@
 class Business < ActiveRecord::Base
     has_many :reviews 
-    acts_as_mappable 
+    acts_as_mappable
+    has_and_belongs_to_many :types
    
     def get_avg_rating
        self.reviews.average("stars")
