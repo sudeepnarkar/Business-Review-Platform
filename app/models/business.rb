@@ -14,4 +14,29 @@ class Business < ActiveRecord::Base
     def get_rev_count(time1, time2)
        self.reviews.where(create_date: time1..time2).count
     end
+    
+    def where_am_i_overall(loc, dist)
+        list = Business.within(dist, :origin => loc).distinct
+        self.get_place(list)
+    end
+    
+    def where_am_i_type(loc, dist, t)
+        list = t.businesses.within(dist, :origin => loc).distinct
+        self.get_place(list)
+    end
+    
+    def get_place(list)
+        c = list.count
+        avg = self.get_avg_rating
+        better = 0
+        list.each do |b|
+            if b.get_avg_rating > avg
+                better += 1
+            end
+        end
+        [better, c]
+    end
+    
+    def list_by_average
+    end
 end

@@ -1,7 +1,7 @@
 class Type < ActiveRecord::Base
   has_and_belongs_to_many :businesses
   
-  def all_types
+  def self.all_types
     [  "accounting",
        "airport",
        "amusement_park",
