@@ -14,6 +14,12 @@
 %p #{@bus.get_rev_count(Date.today - 30, Date.today)} people reviewed in the last 30 days
 %p #{@bus.get_rev_count(Date.today - 60, Date.today - 30)} people reviewed the month before that
 
+-if ! @rate[0].nil?
+    %p #{@bus.name} is ##{@rate[0]} of #{@rate[1]} businesses in the area
+
+-@rt.each do |r|
+    %p #{@bus.name} is ranked #{r[0]} of #{pluralize(r[1], r[2])} in the area 
+
 %center
     %h3 Amount of reviews for each rating
 = bar_chart @bus.reviews.group(:stars).count, colors:["#D45500"], label: "Number of Reviews"
