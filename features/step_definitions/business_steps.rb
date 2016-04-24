@@ -8,6 +8,8 @@ When(/^"([^"]*)" adds a (\d+) star review on "([^"]*)"$/) do |arg1, arg2, arg3|
     r = Review.create!(stars: arg2)
     u.reviews << r
     b.reviews << r
+    b.average = b.get_avg_rating
+    b.save!
 end
 
 Given(/^I own a cafe called "([^"]*)" at (\d+) ([^"]*), ([^"]*), ([^"]*), (\d+)$/) do |name, st_num, st_name, city, state, zip|
@@ -28,10 +30,10 @@ Given(/^other businesses around "([^"]*)" exist and have an average rating of (\
   Type.all_types.each do |t|
     Type.find_or_create_by(name: t)
   end
-  for i in 1..100
-    bx = Business.create!(name: "Bus#{i}x", lat: origin_lat + (i * 0.17), lng: origin_lng)
-    by = Business.create!(name: "Bus#{i}y", lat: origin_lat , lng: origin_lng + (i * 0.17))
-    bz = Business.create!(name: "Bus#{i}z", lat: origin_lat + (i * 0.17), lng: origin_lng + (i * 0.17))
+  for i in 1..20
+    bx = Business.create!(name: "Bus#{i}x", lat: origin_lat + (i * 0.00001), lng: origin_lng, average: arg2)
+    by = Business.create!(name: "Bus#{i}y", lat: origin_lat , lng: origin_lng + (i * 0.17), average: arg2)
+    bz = Business.create!(name: "Bus#{i}z", lat: origin_lat + (i * 0.00001), lng: origin_lng + (i * 0.17), average: arg2)
     for j in 1..5
       bx.types << Type.offset(rand(Type.count)).first
       #p bx.types
@@ -40,13 +42,14 @@ Given(/^other businesses around "([^"]*)" exist and have an average rating of (\
     end
   end
   #p Business.last.types
+  #p Business.all.count
 end
 
 Given(/^"([^"]*)" has an average rating of (\d+) stars$/) do |arg1, arg2|
   # Write code here that turns the phrase above into concrete actions
   b = Business.find_or_create_by(name: arg1)
-  r = Review.create!(stars: arg2)
-  b.reviews << r
+  b.average = arg2
+  b.save!
 end
 
 Given(/^"([^"]*)" is a "([^"]*)"$/) do |arg1, arg2|

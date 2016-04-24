@@ -8,7 +8,18 @@ class BusinessesController < ApplicationController
    
    def profile
        @bus = Business.find(params[:id])
-       @avg = @bus.get_avg_rating
+       #p @bus.inspect
+       @avg = @bus.average
+       @rate = @bus.where_am_i_overall([@bus.lat, @bus.lng], 30)
+       p @rate
+       @rt = []
+       @bus.types.each do |t|
+          r = @bus.where_am_i_type([@bus.lat, @bus.lng], 30, t)
+          r.push(t.name)
+          @rt.push(r)
+       end
+       p @rt
+       p Business.all.count
        avg_this_week = @bus.get_avg_rating_time(Date.today - 7, Date.today)
        avg_last_week = @bus.get_avg_rating_time(Date.today - 14, Date.today - 7)
         if (avg_last_week != nil and avg_this_week != nil)

@@ -11,12 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420025102) do
+ActiveRecord::Schema.define(version: 20160423213250) do
 
   create_table "businesses", force: :cascade do |t|
     t.string "name"
     t.float  "lat"
     t.float  "lng"
+    t.float  "average"
+    t.string "address"
   end
 
   create_table "businesses_types", id: false, force: :cascade do |t|

@@ -16,27 +16,30 @@ class Business < ActiveRecord::Base
     end
     
     def where_am_i_overall(loc, dist)
-        list = Business.within(dist, :origin => loc).distinct
+        list = Business.within(dist, :origin => loc).order('average DESC').distinct
         self.get_place(list)
     end
     
     def where_am_i_type(loc, dist, t)
-        list = t.businesses.within(dist, :origin => loc).distinct
+        list = t.businesses.within(dist, :origin => loc).order('average DESC').distinct
         self.get_place(list)
     end
     
     def get_place(list)
         c = list.count
-        avg = self.get_avg_rating
-        better = 0
-        list.each do |b|
-            if b.get_avg_rating > avg
-                better += 1
-            end
+        if (list.find_index(self) != nil)
+            better = list.find_index(self) + 1
+        else
+            better = nil
         end
+        #avg = self.get_avg_rating
+        #better = 0
+        #list.each do |b|
+        #    if b.get_avg_rating > avg
+        #        better += 1
+        #    end
+        #end
         [better, c]
     end
     
-    def list_by_average
-    end
 end

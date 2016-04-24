@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+    after_save :update_business_average
+    
     def new
         # Retrieve coordinate using the client's ip address
         
@@ -13,5 +15,11 @@ class ReviewsController < ApplicationController
         #longitude = location[1]
     end
     
+    
+    protected
+        def update_business_average
+           self.business.average = self.business.get_avg_rating 
+           self.business.save!
+        end
     
 end
