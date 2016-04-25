@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe ReviewsController do
+
     describe '#new' do
         it 'Calls the correct geocoder method' do
             my_ip = "1.1.1.1.1"
@@ -10,7 +11,6 @@ describe ReviewsController do
                 with(my_ip).and_return(my_coords)
             #expect(request).to receive(:location) 
             post :new
-        
         end
     end
 end
