@@ -1,2 +1,11 @@
 %h1 New review
-%h2 IP #{@ip} is somewhere near #{@test}
+%table#places
+    %thead
+        %tr
+            %th= 'Business'
+    %tbody
+        - @places.each do |place|
+            %tr
+                %td= place.name
+            
+            
