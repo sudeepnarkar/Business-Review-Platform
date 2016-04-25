@@ -30,6 +30,9 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.10'
 
 gem 'haml' 
 
+gem "chartkick"
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
