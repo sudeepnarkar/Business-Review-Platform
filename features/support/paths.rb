@@ -35,7 +35,8 @@ module NavigationHelpers
     when /^the login page$/
       user_login_path
       
-  
+    when/"(.*)"'s profile page/i
+      profile_business_path(Business.find_by_name($1))
       
     when /the index page/i
       '/'

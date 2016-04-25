@@ -6,9 +6,11 @@ Given(/^The following reviews exist for "([^"]*)":$/) do |arg1, table|
       r = Review.create!(stars: review[:rating],create_date: review[:date])
       r.user = User.find_or_create_by(name: review[:reviewer])
       test_bus.reviews << r
+      
   end
   #pending # Write code here that turns the phrase above into concrete actions
-  
+  test_bus.average = test_bus.get_avg_rating
+  test_bus.save!
 end
 
 Given(/^"([^"]*)" has made the following reviews:$/) do |arg1, table|
@@ -17,7 +19,9 @@ Given(/^"([^"]*)" has made the following reviews:$/) do |arg1, table|
   table.hashes.each do |rev|
     r = Review.create!(stars: rev[:rating],create_date: rev[:date])
     r.business = Business.find_or_create_by(name: rev[:place])
-    test_usr. reviews << r
+    test_usr.reviews << r
+    r.business.average = r.business.get_avg_rating
+    r.business.save!
   end
 end
 
