@@ -3,7 +3,8 @@
 -# @bus.reviews.where(:create_date => ((Date.today - 120).beginning_of_day)..((Date.today).end_of_day)).inspect
 -# @bus.reviews.count.inspect
 
-%p #{@bus.name} has an overall average rating of #{@avg.round(2)} stars
+-if ! @avg.nil?
+    %p #{@bus.name} has an overall average rating of #{@avg.round(2)} stars
 %p #{@bus.reviews.count} people have left a review on your business' page!
 
 %p #{@message_week}
