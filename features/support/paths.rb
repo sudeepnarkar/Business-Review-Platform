@@ -15,8 +15,12 @@ module NavigationHelpers
     
     when /the signup page/
       new_user_path
-      
-      
+     
+    when /the business user signup page/
+      new_business_path
+    
+    when /the new review page/
+      new_review_path
       
     when /the reviewer page for (.+)/
       user_path User.where(email: $1)[0].id
@@ -26,6 +30,9 @@ module NavigationHelpers
        
     when /the details page for "(.*)"/i
       business_path(Business.find_by_name($1))
+    
+    when /business page for "(.*)"/i  
+        business_path(Business.find_by_email($1))
       
     when /"(.*)"'s page/i
       #puts User.all.inspect

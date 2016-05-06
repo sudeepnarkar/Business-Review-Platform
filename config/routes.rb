@@ -18,6 +18,14 @@ Rails.application.routes.draw do
   resources :businesses do
     get 'profile', on: :member
   end
+  
+  get 'business/login' => 'businesses#login'
+  
+  post 'business/login' => 'businesses#validate'
+  
+  get 'business/profile' => 'businesses#profile'
+  
+  get 'business/logout' => 'businesses#logout'
   # You can have the root of your site routed with "root"
   
 
