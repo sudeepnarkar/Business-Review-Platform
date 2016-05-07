@@ -18,8 +18,6 @@ class ReviewsController < ApplicationController
         
         p @places.inspect
         
-        
-        
     end
     
     
@@ -28,5 +26,4 @@ class ReviewsController < ApplicationController
            self.business.average = self.business.get_avg_rating 
            self.business.save!
         end
-    
 end
