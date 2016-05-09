@@ -16,7 +16,7 @@ describe ReviewsController do
     
     describe '#create' do
         before :each do
-            
+            #test comments
             @review_params = {:stars => "4", :description => "Nice Outlet", :business_id => "123" }
         end
         
