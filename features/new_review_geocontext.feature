@@ -5,7 +5,5 @@ Feature: List of nearby business displayed on new rating page
   
   Background: 
     Given I am on the new review page
-  
-  Scenario: "I have a valid GPS and coordinates can be retreived"
-
+    And the following items are in the dropdown list
         
