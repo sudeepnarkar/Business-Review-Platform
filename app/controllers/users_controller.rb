@@ -10,11 +10,14 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   
+  
+  
   def profile
     if (session[:user] == nil)
       flash[:notice] = "You are not logged in!"
       redirect_to(user_login_path)
     else
+      
       p "profile"
       p session[:user]
       redirect_to(user_path(session[:user]["id"]))
@@ -62,6 +65,9 @@ class UsersController < ApplicationController
    p @user.inspect
    if @user != nil
      p "Happy path inside validate"
+     cookies[:email] = params["user"]["email"]
+    # Sets a cookie that expires in 1 hour.
+     cookies[:login] = { :value => @user.id, :expires => 1.hour.from_now }
      session[:user] = @user
      redirect_to user_path(@user.id)
    else
