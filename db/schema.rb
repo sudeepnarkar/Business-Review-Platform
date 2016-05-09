@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423213250) do
+ActiveRecord::Schema.define(version: 20160502144047) do
 
   create_table "businesses", force: :cascade do |t|
     t.string "name"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20160423213250) do
     t.integer "type_id",     null: false
     t.integer "business_id", null: false
   end
+
+  create_table "distances", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "business_id"
+    t.float   "dist"
+  end
+
+  add_index "distances", ["business_id"], name: "index_distances_on_business_id"
+  add_index "distances", ["user_id"], name: "index_distances_on_user_id"
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "stars"
@@ -47,6 +56,8 @@ ActiveRecord::Schema.define(version: 20160423213250) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "name"
+    t.float    "lat"
+    t.float    "lng"
   end
 
 end

@@ -40,9 +40,15 @@ div#main {
 }
 
 .profile{
-  
+  width: 60px;
 }
 
+.new{
+  width: 73px;
+}
+.loc{
+  width: 73px;
+}
 #notice #warning {
   background: rosybrown;
   margin: 1em 0;
