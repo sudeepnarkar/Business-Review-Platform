@@ -13,5 +13,31 @@ describe ReviewsController do
             post :new
         end
     end
+    
+    describe '#create' do
+        before :each do
+            
+            @review_params = {:stars => "4", :description => "Nice Outlet", :business_id => "123" }
+        end
+        
+        context "when review parameters are provided" do
+            it "creates a new review in database" do
+                session[:user] = {}
+                session[:user]["id"] = 1
+                expect(Review).to receive(:create!).with({:stars => "4", :description => "Nice Outlet", :business_id => "123"})
+                post :create, :review => @review_params
+                
+            end
+            
+            it "redirects to user's show page" do
+                session[:user] = {}
+                session[:user]["id"] = 1
+                expect(Review).to receive(:create!).with({:stars => "4", :description => "Nice Outlet", :business_id => "123"})
+                post :create, :review => @review_params
+                expect(response).to redirect_to(user_path(1))
+            
+            end
+        end
+    end
 end
         
