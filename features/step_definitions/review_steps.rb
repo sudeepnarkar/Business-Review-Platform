@@ -9,6 +9,8 @@ Given(/^The following reviews exist for "([^"]*)":$/) do |arg1, table|
   #pending # Write code here that turns the phrase above into concrete actions
   #p test_bus
   #p test_bus.reviews.inspect
+  test_bus.average = test_bus.get_avg_rating;
+  test_bus.save!
 end
 
 Given(/^"([^"]*)" has made the following reviews:$/) do |arg1, table|
