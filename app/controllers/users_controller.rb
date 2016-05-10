@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if (session[:user] == nil)
       if (session[:business] == nil)
         flash[:notice] = "You are not logged in!"
-        redirect_to(user_login_path)
+        redirect_to(root_path)
       else
         redirect_to(profile_business_path(session[:business]["id"]))
       end
@@ -72,12 +72,11 @@ class UsersController < ApplicationController
      cookies[:email] = params["user"]["email"]
      # Sets a cookie that expires in 1 hour.
      cookies[:login] = { :value => @user.id, :expires => 1.hour.from_now }
-     print "---------------------cookie--------------------"
-     print cookies.inspect
      session[:user] = @user
      redirect_to user_path(@user.id)
    else
      p "sad path inside validate"
+     flash[:notice] = "Invailid Login Credentials"
      redirect_to user_login_path
    end
 

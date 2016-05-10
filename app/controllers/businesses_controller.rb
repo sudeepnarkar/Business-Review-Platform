@@ -71,6 +71,7 @@ class BusinessesController < ApplicationController
        @bus = Business.find(params[:id])
        #p @bus.inspect
        @avg = @bus.average
+       p @bus.average
        @rate = @bus.where_am_i_overall([@bus.lat, @bus.lng], 30)
        p @rate
        @rt = []
