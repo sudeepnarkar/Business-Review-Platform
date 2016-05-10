@@ -25,7 +25,7 @@ places = client.spots(lat, long, :radius => 100000)
 num = 0
 
 places.each do |pl|
-    b = Business.create!(name: pl.name, lat: pl.lat, lng: pl.lng, email: "email#{num}@email.com", password_hash: "password")
+    b = Business.create!(name: pl.name, lat: pl.lat, lng: pl.lng, email: "email#{num}@email.com", password_hash: "password", place_id: pl.reference)
     pl.types.each do |t|
        type = Type.find_or_create_by(name: t)
        b.types << type
