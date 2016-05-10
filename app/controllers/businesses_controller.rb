@@ -65,9 +65,7 @@ class BusinessesController < ApplicationController
         @revs = @bus.reviews
     end
     
-  def index
-    @businesses = Business.all
-  end
+
    
    def profile
        @bus = Business.find(params[:id])
@@ -167,7 +165,7 @@ end
         
       #p ">>>user id #{@user.id}"
       session[:business] = @business
-      redirect_to business_path(@business.id)
+      redirect_to profile_business_path(@business.id)
     else
       p "sad."
       flash[:warning] = "Please fill in all required fields."
