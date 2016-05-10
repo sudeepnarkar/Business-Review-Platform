@@ -10,7 +10,7 @@ Business.destroy_all
 User.destroy_all
 
 for i in 0..10 do
-    User.create!(name:"Usr#{i}", password_hash: "password#{i}")
+    User.create!(name:"Usr#{i}", password_hash: "password", email: "email#{i}@email.com")
 end
 
 
@@ -22,8 +22,10 @@ lat = 42.0896417
 #Retrieve a colection of nearby places. 
 places = client.spots(lat, long, :radius => 100000)
 
+num = 0
+
 places.each do |pl|
-    b = Business.create!(name: pl.name, lat: pl.lat, lng: pl.lng)
+    b = Business.create!(name: pl.name, lat: pl.lat, lng: pl.lng, email: "email#{num}@email.com", password_hash: "password")
     pl.types.each do |t|
        type = Type.find_or_create_by(name: t)
        b.types << type

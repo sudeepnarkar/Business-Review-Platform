@@ -14,8 +14,12 @@ class UsersController < ApplicationController
   
   def profile
     if (session[:user] == nil)
-      flash[:notice] = "You are not logged in!"
-      redirect_to(user_login_path)
+      if (session[:business] == nil)
+        flash[:notice] = "You are not logged in!"
+        redirect_to(user_login_path)
+      else
+        redirect_to(profile_business_path(session[:business]["id"]))
+      end
     else
       
       p "profile"
@@ -66,7 +70,7 @@ class UsersController < ApplicationController
    if @user != nil
      p "Happy path inside validate"
      cookies[:email] = params["user"]["email"]
-    # Sets a cookie that expires in 1 hour.
+     # Sets a cookie that expires in 1 hour.
      cookies[:login] = { :value => @user.id, :expires => 1.hour.from_now }
      print "---------------------cookie--------------------"
      print cookies.inspect
@@ -102,6 +106,9 @@ class UsersController < ApplicationController
         
       #p ">>>user id #{@user.id}"
       session[:user] = @user
+      cookies[:email] = params["user"]["email"]
+      # Sets a cookie that expires in 1 hour.
+      cookies[:login] = { :value => @user.id, :expires => 1.hour.from_now }
       redirect_to user_path(@user.id)
     else
       p "sad."
