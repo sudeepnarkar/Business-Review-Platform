@@ -8,10 +8,15 @@
 
   %body{bgcolor: "#D45500"}
     = javascript_include_tag "https://www.google.com/jsapi", "chartkick" 
-    %h1.title 
-      Business Review Platform 
-      %a{:href => user_profile_path}
-        %img.profile{:src =>  "/profile.png", :alt => "Profile"}
+    %center
+      %h1.title 
+        Business Review Platform 
+        %a{:href => new_review_path}
+          %img.new{:src => "/new.png", :alt => "New Review"}
+        %a{:href => businesses_path}
+          %img.loc{:src =>  "/loc.png", :alt => "Businesses in the Area"}
+        %a{:href => user_profile_path}
+          %img.profile{:src =>  "/profile.png", :alt => "Profile"}
     #main
       - if flash[:notice]
         #notice.message= flash[:notice]

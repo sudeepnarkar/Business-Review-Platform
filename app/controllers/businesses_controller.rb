@@ -1,4 +1,63 @@
 class BusinessesController < ApplicationController
+    @@GOOGLE_PLACES_KEY = "AIzaSyAN1LO4ZST-Qr-_o7q2MqGBNafA9d_VEBM"
+    @@MAX_DIST = 30
+    def index
+        p params.inspect
+        #cond.merge({:all})
+        #unless (session[:location].nil?)
+        #    @location = session[:location]
+        #else
+        @loc = []
+        ip = request.remote_ip
+        client = GooglePlaces::Client.new(@@GOOGLE_PLACES_KEY)
+        @location = Geokit::Geocoders::MultiGeocoder.geocode(ip)
+        #end
+        @loc = [@location.lat, @location.lng]
+        p @loc
+        @u = session[:user] || User.create!(name: 'temp_user')
+        #p u.inspect
+        #p Business.all
+        p @loc[0].to_f
+        p @loc[1].to_f
+        min_lat = @loc[0].to_f - ((0.017)*(@@MAX_DIST))
+        max_lat = @loc[0].to_f + (0.017)*(@@MAX_DIST)
+        min_lng = @loc[1].to_f - ((0.017)*(@@MAX_DIST))
+        max_lng = @loc[1].to_f + (0.017)*(@@MAX_DIST)
+        bus_loc = Business.where(:lat => (min_lat)..(max_lat), :lng => (min_lng)..(max_lng))
+        p bus_loc.inspect
+        bus_loc.each do |b|
+            Distance.create!(:dist => @location.distance_to(b), :business_id => b.id, :user_id => @u.id)
+        end
+        p Distance.all.inspect
+        
+        #cond.merge({:origin => @loc})
+        dist = params[:dist] || session[:dist] || @@MAX_DIST
+        dist = dist.to_i
+        cond = {:dist => 0..dist, :user_id => @u.id}
+        sort = params[:sort] || session[:sort] || []
+        if sort == 'dist'
+            order = 'dist ASC'
+        elsif sort == 'name'
+            order = 'businesses.name ASC'
+        else
+            order = 'businesses.average DESC'
+        end
+        unless session[:sort] == params[:sort] and session[:dist] == params[:dist]
+            session[:sort] = params[:sort]
+            session[:dist] = params[:dist]
+            redirect_to businesses_path(:sort => sort, :dist => dist)
+        end
+        dist_list = Distance.includes(:business).where(cond).order(order)
+        p dist_list.inspect
+        @bus = []
+        dist_list.each do |d|
+           @bus.push(Business.find(d.business_id))
+        end
+        
+        p @bus.inspect
+        #@bus = bus_loc.distances.where(cond)
+        
+    end
     
     def show
         id = params[:id]
@@ -6,9 +65,7 @@ class BusinessesController < ApplicationController
         @revs = @bus.reviews
     end
     
-  def index
-    @businesses = Business.all
-  end
+
    
    def profile
        @bus = Business.find(params[:id])
@@ -108,7 +165,7 @@ end
         
       #p ">>>user id #{@user.id}"
       session[:business] = @business
-      redirect_to business_path(@business.id)
+      redirect_to profile_business_path(@business.id)
     else
       p "sad."
       flash[:warning] = "Please fill in all required fields."

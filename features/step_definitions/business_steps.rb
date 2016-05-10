@@ -5,11 +5,8 @@ end
 When(/^"([^"]*)" adds a (\d+) star review on "([^"]*)"$/) do |arg1, arg2, arg3|
     u = User.find_or_create_by(name: arg1)
     b = Business.find_or_create_by(name: arg3)
-    r = Review.create!(stars: arg2)
+    r = Review.create!(stars: arg2, business_id: b.id)
     u.reviews << r
-    b.reviews << r
-    b.average = b.get_avg_rating
-    b.save!
 end
 
 Given(/^I own a cafe called "([^"]*)" at (\d+) ([^"]*), ([^"]*), ([^"]*), (\d+)$/) do |name, st_num, st_name, city, state, zip|
@@ -63,3 +60,22 @@ Given(/^"([^"]*)" is a "([^"]*)"$/) do |arg1, arg2|
 end
 
 #rails generate migration CreateJoinTableTypeBusiness type business
+
+When(/^there are some businesses in the area$/) do
+  #pending # Write code here that turns the phrase above into concrete actions
+  client = GooglePlaces::Client.new("AIzaSyAN1LO4ZST-Qr-_o7q2MqGBNafA9d_VEBM")
+  #lat & lng aprox. bu
+  long = -75.9652296 
+  lat = 42.0896417
+  
+  #Retrieve a colection of nearby places. 
+  places = client.spots(lat, long, :radius => 100000)
+  
+  places.each do |pl|
+      b = Business.create!(name: pl.name, lat: pl.lat, lng: pl.lng)
+      pl.types.each do |t|
+         type = Type.find_or_create_by(name: t)
+         b.types << type
+      end
+  end
+end

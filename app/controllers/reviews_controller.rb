@@ -10,14 +10,17 @@ class ReviewsController < ApplicationController
         location = Geokit::Geocoders::MultiGeocoder.geocode(@ip)
         long = location.longitude
         lat = location.latitude
-        #@test = location.longitude #l.inspect
-        #p @test
-        
-        #Retrieve a colection of nearby places. 
-        @places = @client.spots(lat, long, :radius => 1000)
-        
-        p @places.inspect
-        
+        p lat
+        p long
+        @places = {}
+        #Don't attempt to display places without valid coordinates.
+        unless lat.nil? || long.nil?
+            #@test = location.longitude #l.inspect
+            #p @test
+            #Retrieve a colection of nearby places. 
+            @places = @client.spots(lat, long, :radius => 10000)
+            p @places.inspect
+        end
     end
     
     def create
@@ -28,9 +31,11 @@ class ReviewsController < ApplicationController
         redirect_to user_path(session[:user]["id"])
     end
     
+
     protected
         def update_business_average
            self.business.average = self.business.get_avg_rating 
            self.business.save!
         end
+
 end

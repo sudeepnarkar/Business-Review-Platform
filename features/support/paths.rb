@@ -45,8 +45,12 @@ module NavigationHelpers
     when/"(.*)"'s profile page/i
       profile_business_path(Business.find_by_name($1))
       
+    when /the listing page/i
+      businesses_path
+        
+        
     when /the index page/i
-      '/'
+      root_path
       
 
     else
