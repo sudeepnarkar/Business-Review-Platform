@@ -50,7 +50,7 @@ module NavigationHelpers
         
         
     when /the index page/i
-      '/'
+      root_path
       
 
     else

@@ -285,17 +285,23 @@ end
   #user = FactoryGirl.create(:user)
   visit path_to ("the login page")
   fill_in('Email', with: "jdoe1@university.edu")
-  fill_in('Password_hash', with: '28*jaAjdsA')
+  fill_in('Password_hash', with: '&28*jaAjdsA')
   click_button('Login')
 
-  Capybara.current_session.driver.request.cookies.[]('auth_token').should_not be_nil
-  auth_token_value = Capybara.current_session.driver.request.cookies.[]('auth_token')
+  Capybara.current_session.driver.request.cookies.[]('login').should_not be_nil
+  auth_token_value = Capybara.current_session.driver.request.cookies.[]('login')
   Capybara.reset_sessions!
-  page.driver.browser.set_cookie("auth_token=#{auth_token_value}")
+ # page.driver.browser.set_cookie("login=#{{:value=>auth_token_value}}")
+   page.driver.browser.set_cookie("login => auth_token_value")
 end
 
 
 Then(/^I should automatically be logged in$/) do
   #page.should have_content("Logout")
-  visit path_to(user_profile_path)
+  visit path_to("the reviewer page for jdoe1@university.edu")
+end
+
+Given(/^I am logged in as "([^"]*)"$/) do |email|
+  page.set_rack_session(:user_id => @user.id)
+  #session[:user] = User.where(email: email)[0].id
 end
