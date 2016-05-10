@@ -46,7 +46,7 @@ module NavigationHelpers
       profile_business_path(Business.find_by_name($1))
       
     when /the index page/i
-      '/'
+      root_path
       
 
     else

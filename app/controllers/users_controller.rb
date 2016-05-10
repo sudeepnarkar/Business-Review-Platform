@@ -68,6 +68,8 @@ class UsersController < ApplicationController
      cookies[:email] = params["user"]["email"]
     # Sets a cookie that expires in 1 hour.
      cookies[:login] = { :value => @user.id, :expires => 1.hour.from_now }
+     print "---------------------cookie--------------------"
+     print cookies.inspect
      session[:user] = @user
      redirect_to user_path(@user.id)
    else
