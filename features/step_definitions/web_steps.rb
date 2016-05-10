@@ -277,3 +277,25 @@ end
 When /^I follow image link "([^"]*)"$/ do |img_alt|
     find(:xpath, "//img[@alt = '#{img_alt}']/parent::a").click()
 end
+
+    
+
+
+ Given(/^I didn't log out the last time I was on the site$/) do
+  #user = FactoryGirl.create(:user)
+  visit path_to ("the login page")
+  fill_in('Email', with: "jdoe1@university.edu")
+  fill_in('Password_hash', with: '28*jaAjdsA')
+  click_button('Login')
+
+  Capybara.current_session.driver.request.cookies.[]('auth_token').should_not be_nil
+  auth_token_value = Capybara.current_session.driver.request.cookies.[]('auth_token')
+  Capybara.reset_sessions!
+  page.driver.browser.set_cookie("auth_token=#{auth_token_value}")
+end
+
+
+Then(/^I should automatically be logged in$/) do
+  #page.should have_content("Logout")
+  visit path_to(user_profile_path)
+end

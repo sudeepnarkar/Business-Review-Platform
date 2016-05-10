@@ -1,6 +1,6 @@
 %h1 Create New User
 
-= form_tag users_path do
+= form_tag businesses_path do
 
 
   
@@ -14,13 +14,11 @@
   = password_field :user, 'confirm'
 
   
-  = radio_button_tag :type, 'reviewer', true
+  = radio_button_tag :type, 'reviewer', false
   
   
-  = radio_button_tag :type, 'owner', true
+  = radio_button_tag :type, 'owner', false
   
 
   = submit_tag 'Create Account'
 
-<br />
-= link_to "Already have an account? Sign In here!", user_login_path

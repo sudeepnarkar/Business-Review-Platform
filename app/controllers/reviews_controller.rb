@@ -18,15 +18,25 @@ class ReviewsController < ApplicationController
         
         p @places.inspect
         
-        
-        
     end
     
+    def create
+      p "happy."
+      p session[:user]
+      @review = Review.create! :stars => params["review"]["stars"],:description => params["review"]["description"],:business_id => params["review"]["business_id"]
+        redirect_to user_path(session[:user]["id"])
+    end
     
     protected
         def update_business_average
            self.business.average = self.business.get_avg_rating 
            self.business.save!
         end
+<<<<<<< HEAD
     
+    
+    
+    
+=======
+>>>>>>> 145673f8508cc35a9dba589042ab7129aec047c2
 end

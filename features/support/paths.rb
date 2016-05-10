@@ -15,7 +15,10 @@ module NavigationHelpers
     
     when /the signup page/
       new_user_path
-      
+     
+    when /the business user signup page/
+      new_business_path
+    
     when /the new review page/
       new_review_path
       
@@ -23,17 +26,21 @@ module NavigationHelpers
       user_path User.where(email: $1)[0].id
 
     when /^the home\s?page$/
-      user_path
-      
-    when /the login page$/
-      user_login_path
-  
+       user_path
+       
     when /the details page for "(.*)"/i
       business_path(Business.find_by_name($1))
+    
+    when /business page for "(.*)"/i  
+        business_path(Business.find_by_email($1))
       
     when /"(.*)"'s page/i
       #puts User.all.inspect
       user_path(User.find_by_name($1))
+
+    
+    when /^the login page$/
+      user_login_path
       
     when/"(.*)"'s profile page/i
       profile_business_path(Business.find_by_name($1))
@@ -45,6 +52,7 @@ module NavigationHelpers
     when /the index page/i
       '/'
       
+
     else
       begin
         page_name =~ /^the (.*) page$/
