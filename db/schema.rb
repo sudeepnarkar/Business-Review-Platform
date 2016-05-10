@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 20160503232624) do
     t.integer "business_id", null: false
   end
 
+  create_table "distances", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "business_id"
+    t.float   "dist"
+  end
+
+  add_index "distances", ["business_id"], name: "index_distances_on_business_id"
+  add_index "distances", ["user_id"], name: "index_distances_on_user_id"
+
   create_table "reviews", force: :cascade do |t|
     t.integer  "stars"
     t.text     "description"
@@ -50,6 +59,8 @@ ActiveRecord::Schema.define(version: 20160503232624) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "name"
+    t.float    "lat"
+    t.float    "lng"
   end
 
 end
