@@ -3,25 +3,20 @@ Given(/^The following reviews exist for "([^"]*)":$/) do |arg1, table|
   test_bus = Business.find_or_create_by(name: arg1)
 
   table.hashes.each do |review|
-      r = Review.create!(stars: review[:rating],create_date: review[:date])
-      r.user = User.find_or_create_by(name: review[:reviewer])
-      test_bus.reviews << r
-      
+      u = User.find_or_create_by(name: review[:reviewer])
+      r = Review.create!(stars: review[:rating],create_date: review[:date], business_id: test_bus.id, user_id: u.id)
   end
   #pending # Write code here that turns the phrase above into concrete actions
-  test_bus.average = test_bus.get_avg_rating
-  test_bus.save!
+  #p test_bus
+  #p test_bus.reviews.inspect
 end
 
 Given(/^"([^"]*)" has made the following reviews:$/) do |arg1, table|
   test_usr = User.find_or_create_by(name: arg1)
   #puts User.all.to_s
   table.hashes.each do |rev|
-    r = Review.create!(stars: rev[:rating],create_date: rev[:date])
-    r.business = Business.find_or_create_by(name: rev[:place])
-    test_usr.reviews << r
-    r.business.average = r.business.get_avg_rating
-    r.business.save!
+    tb = Business.find_or_create_by(name: rev[:place])
+    Review.create!(stars: rev[:rating],create_date: rev[:date], business_id: tb.id)
   end
 end
 
