@@ -15,12 +15,16 @@ class ReviewsController < ApplicationController
         @places = {}
         #Don't attempt to display places without valid coordinates.
         
+        @test=@ip 
+        @lat =lat
+        @long =long
+        
         
         unless lat.nil? || long.nil?
             #@test = location.longitude #l.inspect
         
             #Retrieve a colection of nearby places. 
-            @places = @client.spots(lat, long, :radius => 10000)
+            @places = @client.spots(lat, long, :radius => 10000000)
             
             p @places.inspect
         end

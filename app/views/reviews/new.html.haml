@@ -4,7 +4,11 @@
     %select{:id => "Business", :name => "review[business_id]"}
         - @places.each do |place|
             %option{:value => "#{place.id}"}= place.name
-    = p @test        
+    = p @test 
+    = p @lat
+    = p @long
+    = p @lat.nil?
+    = p @long.nil?
     %br
             
     %input{:type => "radio", :name => "review[stars]", :value => 1} One Star
