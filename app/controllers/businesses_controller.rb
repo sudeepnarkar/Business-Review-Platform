@@ -26,14 +26,14 @@ class BusinessesController < ApplicationController
         bus_loc = Business.where(:lat => (min_lat)..(max_lat), :lng => (min_lng)..(max_lng))
         p bus_loc.inspect
         bus_loc.each do |b|
-            Distance.create!(:dist => @location.distance_to(b), :business_id => b.id, :user_id => @u.id)
+            Distance.create!(:dist => @location.distance_to(b), :business_id => b.id, :user_id => @u["id"])
         end
         p Distance.all.inspect
         
         #cond.merge({:origin => @loc})
         dist = params[:dist] || session[:dist] || @@MAX_DIST
         dist = dist.to_i
-        cond = {:dist => 0..dist, :user_id => @u.id}
+        cond = {:dist => 0..dist, :user_id => @u["id"]}
         sort = params[:sort] || session[:sort] || []
         if sort == 'dist'
             order = 'dist ASC'
