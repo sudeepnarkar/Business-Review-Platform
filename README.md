@@ -1,7 +1,7 @@
 For this project, we intend to create a interactive web application that shall allow users associated with
 a college or university to generate and view ratings and reviews of local businesses.
 
-Made with Rails 4.2.4 and ruby 2.3.0p0 (2015-12-25 revision 53290) [x86_64-linux]
+Created with Rails 4.2.4 and ruby 2.3.0p0 (2015-12-25 revision 53290) [x86_64-linux]
 
 Instructions for running this project on your own server are in readme.pdf. 
 
@@ -31,23 +31,22 @@ bundle exec rake db:seed
 
 rails server -b $IP -p $PORT
 
-
-On HEroku:
+On Heroku:
 
 between heroku run rake db:migrate ad heroku open
 
 do $: heroku run rake db:seed
 
-So tht the sequence of commands is:
+So that the sequence of commands is:
 
-heroku login
+1. heroku login
 
-heroku create
+2. heroku create
 
-git push heroku master
+3. git push heroku master
 
-heroku run rake db:migrate
+4. heroku run rake db:migrate
 
-heroku run rake db:seed
+5. heroku run rake db:seed
 
-heroku open
+6. heroku open (If this does not work just go to your heroku dashboard and go to the link mentioned in the settings)
