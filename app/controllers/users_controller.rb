@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       #p session[:user].inspect
       #p session[:user]["id"]
       if (params[:id].to_i == session[:user]["id"]) 
-        @reviews = User.find(params[:id]).reviews
+        @reviews = User.find(params[:id]).reviews.order("create_date DESC")
       else
         flash[:notice] = "You do not have access to #{User.find(params[:id]).name}'s page"
         redirect_to root_path
