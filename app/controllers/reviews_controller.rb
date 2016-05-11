@@ -33,9 +33,12 @@ class ReviewsController < ApplicationController
       p "happy."
       p session[:user]
 <<<<<<< HEAD
+<<<<<<< HEAD
       @review = Review.create! :stars => params["review"]["stars"],:description => params["review"]["description"],:business_id => params["review"]["business_id"]
         redirect_to new_review_path(session[:user]["id"])
 =======
+=======
+>>>>>>> BRP-MAIN/master
       @review = Review.create! :stars => params["review"]["stars"],:description => params["review"]["description"], :business_id => params["review"]["business_id"]
         flash[:warning] = "Params: #{params.inspect}"
 =end
@@ -63,8 +66,6 @@ class ReviewsController < ApplicationController
         flash[:notice] = bus.id
 
         redirect_to user_path(session[:user]["id"])
-
-
     end
     
 
