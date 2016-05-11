@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20160510200604) do
 
   create_table "businesses", force: :cascade do |t|
     t.string "name"
-    t.string "types"
     t.float  "lat"
     t.float  "lng"
     t.float  "average"
