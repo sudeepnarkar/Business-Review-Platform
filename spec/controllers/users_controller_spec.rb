@@ -15,7 +15,7 @@ describe UsersController do
         
         it "redirects to the login page if not" do
             get :profile
-            expect(response).to redirect_to(user_login_path)
+            expect(response).to redirect_to(root_path)
         end
        
    end
