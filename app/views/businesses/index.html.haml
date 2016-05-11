@@ -13,8 +13,9 @@
         %th= link_to "Business", businesses_path(:sort => 'name')
         %th= link_to "Dist.", businesses_path(:sort => 'dist')
         %th= link_to "Rating", businesses_path(:sort => 'rating')
+
     - @bus.each do |b|
         %tr
             %th= link_to b.name, business_path(b.id)
-            %th  #{Distance.find_by(user_id: @u.id, business_id: b.id).dist.round(2)}
+            %th  #{Distance.find_by(user_id: @u["id"], business_id: b.id).dist.round(2)}
             %th  #{b.average.round(2)}
