@@ -9,11 +9,3 @@
 
 %p= link_to("BUSINESS USER - LOG IN", business_login_path,  class: "btn btn-primary btn-lg")
 %p= link_to("BUSINESS USER - SIGN UP", new_business_path,  class: "btn btn-primary btn-lg")
-
-
-
-
--@buses.each do |bus|
-    %p= link_to("#{bus.name}", business_path(bus))
--@users.each do |usr|
-    %p= link_to("#{usr.name}", user_path(usr))

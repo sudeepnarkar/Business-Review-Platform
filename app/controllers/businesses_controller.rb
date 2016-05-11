@@ -26,7 +26,7 @@ class BusinessesController < ApplicationController
         bus_loc = Business.where(:lat => (min_lat)..(max_lat), :lng => (min_lng)..(max_lng))
         p bus_loc.inspect
         bus_loc.each do |b|
-            Distance.create!(:dist => @location.distance_to(b), :business_id => b.id, :user_id => @u["id"])
+            Distance.find_or_create_by(:dist => @location.distance_to(b), :business_id => b.id, :user_id => @u["id"])
         end
         p Distance.all.inspect
         
@@ -47,7 +47,7 @@ class BusinessesController < ApplicationController
             session[:dist] = params[:dist]
             redirect_to businesses_path(:sort => sort, :dist => dist)
         end
-        dist_list = Distance.includes(:business).where(cond).order(order)
+        dist_list = Distance.includes(:business).where(cond).order(order).distinct
         p dist_list.inspect
         @bus = []
         dist_list.each do |d|
@@ -62,7 +62,7 @@ class BusinessesController < ApplicationController
     def show
         id = params[:id]
         @bus = Business.find(id)
-        @revs = @bus.reviews
+        @revs = @bus.reviews.order("create_date DESC")
     end
     
 
@@ -162,7 +162,7 @@ end
       
       p "happy."
       @business = Business.create! :email => params["user"]["email"],
-        :password_hash => params["user"]["password"]
+        :password_hash => params["user"]["password"], :average => 0
         
       #p ">>>user id #{@user.id}"
       session[:business] = @business
