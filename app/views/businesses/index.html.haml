@@ -7,7 +7,7 @@
     = label_tag(:dist_10, "10 miles")
     = radio_button_tag(:dist, "20")
     = label_tag(:dist_20, "20 miles")
-    = submit_tag 'Refresh'
+    = submit_tag 'Refresh', :id => 'dist_sub'
 %table
     %tr
         %th= link_to "Business", businesses_path(:sort => 'name')

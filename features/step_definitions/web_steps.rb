@@ -305,3 +305,12 @@ Given(/^I am logged in as "([^"]*)"$/) do |email|
   page.set_rack_session(:user_id => @user.id)
   #session[:user] = User.where(email: email)[0].id
 end
+
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  #  ensure that that e1 occurs before e2.
+  #  page.body is the entire content of the page as a string.
+  #steps "And I should see \"#{e1}\""
+  p page.body
+  bdyStr = page.body
+  bdyStr.index(e1) < bdyStr.index(e2)
+end
