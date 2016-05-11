@@ -62,7 +62,7 @@ class BusinessesController < ApplicationController
     def show
         id = params[:id]
         @bus = Business.find(id)
-        @revs = @bus.reviews
+        @revs = @bus.reviews.order("create_date DESC")
     end
     
 
