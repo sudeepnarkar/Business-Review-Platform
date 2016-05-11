@@ -1,20 +1,24 @@
 %h1 New review
 %table#places
-= p session[:user]
 = form_tag reviews_path do
-    %select{:id => "Business"}
+    %select{:id => "Business", :name => "review[business_id]"}
         - @places.each do |place|
             %option{:value => "#{place.id}"}= place.name
-            
+    = p @test        
     %br
             
-    %input{:type => "radio", :name => "stars", :value => 1} One Star
-    %input{:type => "radio", :name => "stars", :value => 2} Two Stars
-    %input{:type => "radio", :name => "stars", :value => 3} Three Stars
-    %input{:type => "radio", :name => "stars", :value => 4} Four Stars
-    %input{:type => "radio", :name => "stars", :value => 5} Five Stars
+    %input{:type => "radio", :name => "review[stars]", :value => 1} One Star
+    %input{:type => "radio", :name => "review[stars]", :value => 2} Two Stars
+    %input{:type => "radio", :name => "review[stars]", :value => 3} Three Stars
+    %input{:type => "radio", :name => "review[stars]", :value => 4} Four Stars
+    %input{:type => "radio", :name => "review[stars]", :value => 5} Five Stars
     
+    %br
     
-    = submit_tag 'Create Account'
+    %textarea{:name => "review[description]"} Type Something.
+    
+    %br
+    
+    = submit_tag 'Create Review'
     
             
