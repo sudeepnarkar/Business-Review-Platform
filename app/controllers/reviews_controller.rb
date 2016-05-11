@@ -24,9 +24,21 @@ class ReviewsController < ApplicationController
     end
     
     def create
-      p "happy."
-      p session[:user]
-      @review = Review.create! :stars => params["review"]["stars"],:description => params["review"]["description"],:business_id => params["review"]["business_id"]
+        p "happy."
+        p session[:user]
+        #this is what I added
+        if session[:user].nil?
+           flash[:notice] = "You are not logged in!"
+           redirect_to root_path
+        end
+        if params["review"]["business_id"].nil? or params["review"]["stars"].nil?
+            flash[:notice] = "incorrect parameters"
+        end
+        bus = Business.find_or_create_by(:place_id => params["review"]["business_id"])
+        p bus.inspect
+        p @places
+        @review = Review.create! :stars => params["review"]["stars"],:description => params["review"]["description"],:business_id => bus.id, :create_date => Time.now
+        
         redirect_to user_path(session[:user]["id"])
     end
     
